@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lfz.dao.StudentMapper" >
+	
+	<resultMap type="com.lfz.entity.Student" id="findStudent">
+		<id column="sid" property="sid"/>
+		<result column="sname" property="sname"/>
+		<result column="sex" property="sex"/>
+		<result column="birthday" property="birthday"/>
+		<result column="grade" property="grade"/>
+		 <collection property="college" ofType="com.lfz.entity.College">
+			<id column="college_ID" property="collegeID"/>
+			<result column="collegename" property="collegename"/>
+		</collection> 
+	</resultMap>
+	
+	<select id="findStudentAll" resultMap="findStudent">
+  		SELECT  s.sid,s.sname,s.sex,s.birthday,s.grade,c.collegename from student s,college c where s.collegeID=c.college_ID
+	</select>
+</mapper>

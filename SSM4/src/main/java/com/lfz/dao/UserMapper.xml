@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lfz.dao.UserMapper" >
+	
+	<resultMap type="User" id="findUser">
+		<id column="id" property="uid"/>
+		<result column="username" property="userName"/>
+		<result column="password" property="password"/>
+		<association property="role" javaType="com.lfz.entity.Role">
+			<id column="rid" property="rid"/>
+			<result column="rolename" property="rolename"/>
+		</association>
+	</resultMap>
+	
+	<select id="findUserByUserName" parameterType="java.lang.String" resultMap="findUser">
+  		SELECT*from t_user u,t_role r where u.fk_role_id = r.rid and u.username=#{userName}
+	</select>
+</mapper>

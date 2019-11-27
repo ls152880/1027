@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lfz.dao.MenuMapper" >
+	<resultMap type="Menu" id="findMenu">
+		<id column="mid" property="mid"/>
+		<result column="menuname" property="mname"/>
+		<result column="menulink" property="mlink"/>
+		<collection property="roles" ofType="Role">
+			<id column="rid" property="rid"/>
+			<result column="rolename" property="rolename"/>
+		</collection>
+	</resultMap>
+	<!-- 查询角色所对应的权限 -->
+	<select id="findMenuAll" resultMap="findMenu">
+  		SELECT*from t_menu m,t_role r,t_role_menu t where m.mid = t.fk_mid and r.rid = t.fk_rid
+	</select>
+</mapper>

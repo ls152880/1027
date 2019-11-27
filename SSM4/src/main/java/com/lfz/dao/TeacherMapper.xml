@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lfz.dao.TeacherMapper" >
+	
+	<resultMap type="com.lfz.entity.Teacher" id="findTeacher">
+		<id column="tid" property="tid"/>
+		<result column="tname" property="tname"/>
+		<result column="sex" property="sex"/>
+		<result column="birthday" property="birthday"/>
+		<result column="degree" property="degree"/>
+		<result column="title" property="title"/>
+		<result column="grade" property="grade"/>
+		<!-- <association property="college" javaType="com.lfz.entity.College" >
+			<id column="college_ID" property="collegeID"/>
+			<result column="collegename" property="collegename"/>
+		</association> -->
+		 <collection property="college" ofType="com.lfz.entity.College">
+			<id column="college_ID" property="collegeID"/>
+			<result column="collegename" property="collegename"/>
+		</collection> 
+	</resultMap>
+	
+	<select id="findTeacherAll" resultMap="findTeacher">
+  		SELECT t.tid,t.tname,t.sex,t.birthday,t.degree,t.title,t.grade,c.collegename from teacher t,college c where t.collegeID=c.college_ID
+	</select>
+</mapper>

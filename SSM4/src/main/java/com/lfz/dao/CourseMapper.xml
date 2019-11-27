@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lfz.dao.CourseMapper" >
+	
+	<resultMap type="com.lfz.entity.Course" id="findCourse">
+		<id column="courseid" property="courseid"/>
+		<result column="coursename" property="coursename"/>
+		<result column="classroom" property="classroom"/>
+		<result column="courseweek" property="courseweek"/>
+		<result column="coursetype" property="coursetype"/>
+		 <result column="score" property="score"/>
+	</resultMap>
+	
+	<select id="findCourseAll" resultMap="findCourse">
+  		select *from course
+	</select>
+</mapper>
